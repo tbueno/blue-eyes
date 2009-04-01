@@ -5,7 +5,7 @@
     %link{:rel => 'stylesheet', :type =>'text/css', :href => 'style.css' }
   %body
     #menu
-      %p In the future, you'll have a list of feeds here :P
+      %p In the future, you'll have a list of feeds here
     #content
       .feed
         %h1
