@@ -5,7 +5,11 @@
     %link{:rel => 'stylesheet', :type =>'text/css', :href => 'style.css' }
   %body
     #menu
-      %p In the future, you'll have a list of feeds here :P
+      %form{:action => 'add_feed', :method => 'post', :name => 'add_feed'}
+        %input{:type =>'text', :name => 'feed_url', :id => 'feed_url' }
+        %input{:type => 'submit', :value => 'Add Feed'}
+      %p 
+        = @feeds.size
     #content
       .feed
         %h1
@@ -17,7 +21,3 @@
               %a{:href => entry.url}
                 = entry.title
             = entry.summary
-    
-
-    
-      

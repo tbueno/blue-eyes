@@ -1,5 +1,17 @@
 require 'sinatra'
 require 'feedzirra'
+require 'sequel'
+
+
+configure do
+  Sequel.sqlite('blue_eyes.db')
+end
+
+
+$LOAD_PATH.unshift(File.dirname(__FILE__) + '/lib')
+require 'feed'
+
+
 
 get '/style.css' do
    content_type 'text/css', :charset => 'utf-8'
@@ -12,7 +24,17 @@ get '/hi' do
 end
 
 get '/' do
-	 @feed = Feedzirra::Feed.fetch_and_parse("http://feeds2.feedburner.com/RubyInsideBrasil")
+   @feeds = Feed.all
+	 @feed = Feedzirra::Feed.fetch_and_parse("http://feedproxy.google.com/RubyInside/")
    haml :index
+   
 end
+
+post '/add_feed' do
+  puts params[:feed_url]
+  feed = Feed.new :url => :feed_url
+  feed.save
+  redirect '/'
+end
+
 

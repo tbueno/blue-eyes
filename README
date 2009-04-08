@@ -5,3 +5,4 @@ TODO LIST
 - Fist implementation of feed list: read sources from yaml file
 - Simple form to add new feeds
 - Increase granularity in order to de-encapsulate feed management.
+- Improve sinatra logging system
