@@ -1,6 +1,6 @@
 %html
   %head
-    %title Sinatra Book
+    %title Blue Eyes
     %meta{"http-equiv" => "Content-Type", :content=>"text/html; charset=UTF-8"}
     %link{:rel => 'stylesheet', :type =>'text/css', :href => 'style.css' }
   %body
@@ -8,8 +8,11 @@
       %form{:action => 'add_feed', :method => 'post', :name => 'add_feed'}
         %input{:type =>'text', :name => 'feed_url', :id => 'feed_url' }
         %input{:type => 'submit', :value => 'Add Feed'}
-      %p 
-        = @feeds.size
+      %ul 
+        - @feeds.each do |f|
+          %li
+            %a{:href => "/#{f.id}"}
+              = f.name
     #content
       .feed
         %h1
@@ -20,4 +23,4 @@
             %h2
               %a{:href => entry.url}
                 = entry.title
-            = entry.summary
+            = entry.content

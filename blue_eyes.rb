@@ -25,14 +25,20 @@ end
 
 get '/' do
    @feeds = Feed.all
-	 @feed = Feedzirra::Feed.fetch_and_parse("http://feedproxy.google.com/RubyInside/")
-   haml :index
-   
+	 @feed = Feedzirra::Feed.fetch_and_parse("http://www.tbueno.com/blog/feed/")
+   haml :index   
+end
+
+get '/:id' do
+	@feeds = Feed.all
+	@model = Feed.find(:id => params[:id])
+	@feed = Feedzirra::Feed.fetch_and_parse(@model.url)	
+	haml :index
 end
 
 post '/add_feed' do
-  puts params[:feed_url]
-  feed = Feed.new :url => :feed_url
+  f = Feedzirra::Feed.fetch_and_parse(params[:feed_url])
+  feed = Feed.new(:url => f.feed_url, :name => f.title)
   feed.save
   redirect '/'
 end
